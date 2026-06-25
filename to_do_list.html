@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KC AI Labs - Todo List</title>
+
+    <!-- <link rel="stylesheet" href="style.css"> -->
+<!--<style>
+        /* KC AI Labs Theme */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
+}
+
+body{
+    background:#000;
+    color:white;
+    min-height:100vh;
+    padding:30px;
+}
+
+/* Main Container */
+
+.container{
+    max-width:900px;
+    margin:auto;
+    background:rgb(0, 0, 0);
+    border:1px solid #ff7b00;
+    border-radius:20px;
+    padding:25px;
+    box-shadow:
+        0 0 10px #ff7b00,
+        0 0 30px rgba(255,123,0,0.4);
+}
+
+/* Logo */
+
+.logo{
+    display:flex;
+    justify-content:center;
+    margin-bottom:25px;
+}
+
+.logo img{
+    width:220px;
+    filter:drop-shadow(0 0 15px orange);
+}
+
+/* Add Task Button */
+
+.add-btn{
+    width:100%;
+    padding:14px;
+    border:none;
+    border-radius:12px;
+    background:linear-gradient(45deg,#ff4d00,#ffb300);
+    color:white;
+    font-size:20px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:.3s;
+    margin-bottom:25px;
+}
+
+.add-btn:hover{
+    transform:translateY(-3px);
+    box-shadow:
+        0 0 15px #ff7b00,
+        0 0 30px #ff4d00;
+}
+
+/* Tabs */
+
+.tabs{
+    display:flex;
+    gap:10px;
+    margin-bottom:25px;
+}
+
+.tab-btn{
+    flex:1;
+    padding:12px;
+    border:none;
+    border-radius:10px;
+    background:#1b1b1b;
+    color:white;
+    cursor:pointer;
+    font-weight:600;
+    transition:.3s;
+}
+
+.tab-btn.active{
+    background:linear-gradient(45deg,#ff4d00,#ffb300);
+    box-shadow:0 0 15px #ff7b00;
+}
+
+/* Ordered List */
+
+.task-list{
+    list-style-position:inside;
+}
+
+.task-list li{
+    margin-bottom:18px;
+    padding:18px;
+    background:#151515;
+    border-left:4px solid #ff7b00;
+    border-radius:12px;
+    box-shadow:0 0 10px rgba(255,123,0,.2);
+}
+
+/* Task Text */
+
+.task-title{
+    font-size:18px;
+    font-weight:600;
+    margin-bottom:8px;
+}
+
+.task-time{
+    font-size:13px;
+    color:#bdbdbd;
+    margin-bottom:12px;
+}
+
+/* Button Row */
+
+.task-actions{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+}
+
+/* Common Buttons */
+
+.task-actions button{
+    border:none;
+    cursor:pointer;
+    padding:8px 14px;
+    border-radius:8px;
+    font-weight:600;
+    transition:.3s;
+}
+
+/* Done */
+
+.done-btn{
+    background:#00c853;
+    color:white;
+}
+
+.done-btn:hover{
+    box-shadow:0 0 12px #00ff66;
+}
+
+/* Edit */
+
+.edit-btn{
+    background:#2962ff;
+    color:white;
+}
+
+.edit-btn:hover{
+    box-shadow:0 0 12px #2979ff;
+}
+
+/* Remove */
+
+.remove-btn{
+    background:#d50000;
+    color:white;
+}
+
+.remove-btn:hover{
+    box-shadow:0 0 12px red;
+}
+
+/* Completed Task */
+
+.completed-task{
+    opacity:0.8;
+    border-left-color:#00c853;
+}
+
+.completed-task .task-title{
+    text-decoration:line-through;
+    color:#cfcfcf;
+}
+
+/* Empty State */
+
+.empty{
+    text-align:center;
+    padding:40px;
+    color:#888;
+    font-size:18px;
+}
+
+/* Scroll */
+
+.task-area{
+    max-height:500px;
+    overflow-y:auto;
+    padding-right:8px;
+}
+
+.task-area::-webkit-scrollbar{
+    width:8px;
+}
+
+.task-area::-webkit-scrollbar-thumb{
+    background:#ff7b00;
+    border-radius:10px;
+}
+     </style>-->
+
+     <style>
+        *{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
+}
+
+body{
+    min-height:100vh;
+    padding:30px;
+    color:white;
+
+    background:
+    radial-gradient(circle at center,#819ece 0%,#06142c 40%);
+}
+
+/* Container */
+
+.container{
+    max-width:950px;
+    margin:auto;
+    padding:30px;
+
+    background:rgba(0,10,25,.8);
+
+    border:1px solid #00aaff;
+
+    border-radius:20px;
+
+    box-shadow:
+    0 0 10px #00aaff,
+    0 0 25px rgba(0,170,255,.5),
+    inset 0 0 15px rgba(0,170,255,.2);
+}
+
+/* Logo */
+
+.logo{
+    display:flex;
+    justify-content:center;
+    margin-bottom:20px;
+}
+
+/* .logo img{
+    width:250px;
+    filter:
+    drop-shadow(0 0 10px #00aaff)
+    drop-shadow(0 0 25px #00aaff);
+} */
+
+/* Heading */
+
+h1{
+    text-align:center;
+    color:#7fe7ff;
+    margin-bottom:25px;
+
+    text-shadow:
+    0 0 10px #00aaff,
+    0 0 25px #00aaff;
+}
+
+/* Input Row */
+
+#taskForm div{
+    display:flex;
+    align-items:center;
+    gap:10px;
+
+    padding:15px;
+
+    border-radius:12px;
+
+    background:rgba(0,170,255,.08);
+
+    border:1px solid rgba(0,170,255,.4);
+
+    margin-bottom:15px;
+}
+
+#taskForm label{
+    font-size:1.3rem;
+    font-weight:bold;
+    color:#7fe7ff;
+}
+
+#task{
+    flex:1;
+
+    padding:15px;
+
+    border:none;
+    border-radius:10px;
+
+    background:#061629;
+
+    color:#7fe7ff;
+
+    font-size:1rem;
+    font-weight:600;
+
+    outline:none;
+
+    border:1px solid #00aaff;
+}
+
+#task:focus{
+    box-shadow:
+    0 0 10px #00aaff,
+    0 0 20px rgba(0,170,255,.5);
+}
+
+/* Add Button */
+
+.add-btn{
+    width:100%;
+    padding:15px;
+
+    border:none;
+    border-radius:12px;
+
+    cursor:pointer;
+
+    color:white;
+    font-size:1.1rem;
+    font-weight:bold;
+
+    background:
+    linear-gradient(
+        135deg,
+        #00c8ff,
+        #006eff
+    );
+
+    transition:.3s;
+}
+
+.add-btn:hover{
+    transform:translateY(-3px);
+
+    box-shadow:
+    0 0 15px #00aaff,
+    /* 0 0 35px #006eff; */
+}
+
+/* Tabs */
+
+.tabs{
+    display:flex;
+    gap:12px;
+    margin:25px 0;
+}
+
+.tab-btn{
+    flex:1;
+
+    padding:14px;
+
+    border:none;
+    border-radius:12px;
+
+    cursor:pointer;
+
+    background:#071726;
+
+    color:#d6f8ff;
+
+    font-weight:600;
+
+    transition:.3s;
+}
+
+.tab-btn:hover{
+    box-shadow:
+    0 0 10px #00aaff;
+}
+
+.tab-btn.active{
+    background:
+    linear-gradient(
+        135deg,
+        #00c8ff,
+        #006eff
+    );
+
+    box-shadow:
+    0 0 15px #00aaff,
+    /* 0 0 30px #006eff; */
+}
+
+/* Task Area */
+
+.task-area{
+    max-height:500px;
+    overflow-y:auto;
+    padding-right:10px;
+}
+
+/* Task List */
+
+.task-list{
+    list-style-position:inside;
+}
+
+.task-list li{
+    margin-bottom:18px;
+
+    padding:18px;
+
+    background:#061629;
+
+    border-left:5px solid #00aaff;
+
+    border-radius:12px;
+
+    box-shadow:
+    0 0 10px rgba(0,170,255,.15);
+}
+
+/* Task Title */
+
+.task-title{
+    font-size:18px;
+    font-weight:700;
+    color:#7fe7ff;
+}
+
+/* Time */
+
+.task-time{
+    margin-top:8px;
+    margin-bottom:12px;
+
+    color:#a8dfff;
+    font-size:13px;
+}
+
+/* Action Buttons */
+
+.task-actions{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+}
+
+.task-actions button{
+    border:none;
+    cursor:pointer;
+
+    padding:8px 14px;
+
+    border-radius:8px;
+
+    font-weight:bold;
+
+    transition:.3s;
+}
+
+/* Done */
+
+.done-btn{
+    background:#00b86b;
+    color:white;
+}
+
+.done-btn:hover{
+    box-shadow:
+    0 0 10px #00ff95;
+}
+
+/* Edit */
+
+.edit-btn{
+    background:#008cff;
+    color:white;
+}
+
+.edit-btn:hover{
+    box-shadow:
+    0 0 10px #00aaff;
+}
+
+/* Remove */
+
+.remove-btn{
+    background:#ff2e63;
+    color:white;
+}
+
+.remove-btn:hover{
+    box-shadow:
+    0 0 10px #ff2e63;
+}
+
+/* Completed Task */
+
+.completed-task{
+    opacity:.75;
+    border-left-color:#00ff95;
+}
+
+.completed-task .task-title{
+    text-decoration:line-through;
+    color:#8abdcf;
+}
+
+/* Scrollbar */
+
+.task-area::-webkit-scrollbar{
+    width:8px;
+}
+
+.task-area::-webkit-scrollbar-track{
+    background:#02101f;
+}
+
+.task-area::-webkit-scrollbar-thumb{
+    background:#00aaff;
+    border-radius:20px;
+}
+
+.task-area::-webkit-scrollbar-thumb:hover{
+    background:#00d4ff;
+}
+     </style>
+</head>
+
+<body style="background-color: #010101;color: white;">
+
+    <div class="container">
+
+        <!-- Logo -->
+        <div class="logo">
+            <img src="./images/kc-logo.png" alt="KC AI Labs" style="height: 200px; background-color: black;">
+        </div>
+
+        <h1 style="text-align: center; color: rgb(255, 217, 0);">KC AI Labs To-Do Manager</h1>
+
+        <!-- Add Task Form -->
+        <form id="taskForm">
+            <div style="display: flex; margin: 6px; background-color: rgb(0, 123, 255); border: 2px; border-radius: 1%;">
+            <label for="task" style="font-size: 2rem;">Enter Task :&nbsp;</label>
+            <input
+                type="text"
+                id="task"
+                placeholder="Enter a new task..."
+                autocomplete="off"
+                required 
+                
+                style="border-color: #0898f9;height: 3.3rem; ;width: 80%;height: 3rem; border: 5px; color: #2962ff;font-weight: bold;font-size: larger;"
+            >
+            </div>
+            <button type="submit" class="add-btn">
+                ➕ Add Task
+            </button>
+
+        </form>
+        
+        <!-- Tabs -->
+        <div class="tabs" id="tabs">
+
+            <button
+                type="button"
+                class="tab-btn active"
+                id="pendingTab">
+                📋 Pending Tasks
+            </button>
+
+            <button
+                type="button"
+                class="tab-btn"
+                id="completedTab">
+                ✅ Completed Tasks
+            </button>
+
+        </div>
+
+        <!-- Pending Tasks -->
+
+        <section id="pendingSection" class="task-area">
+
+            <ol id="allTask" class="task-list">
+
+                <!-- Example Task -->
+
+                <!--
+                <li>
+
+                    <div class="task-title">
+                        Complete AI Project
+                    </div>
+
+                    <div class="task-time">
+                        16 June 2026 | 09:45 PM
+                    </div>
+
+                    <div class="task-actions">
+
+                        <button class="done-btn" >
+                            ✓ Done
+                        </button>
+
+                        <button class="edit-btn" >
+                            ✏ Edit
+                        </button>
+
+                        <button class="remove-btn" >
+                            🗑 Remove
+                        </button>
+
+                    </div>
+
+                </li>
+                
+            -->
+            </ol>
+
+        </section>
+
+        <!-- Completed Tasks -->
+
+        <section
+            id="completedSection"
+            class="task-area"
+            style="display:none;"
+        >
+
+            <ol id="completedTasks" class="task-list">
+
+                <!-- Example Completed Task -->
+
+                <!--
+                <li class="completed-task">
+
+                    <div class="task-title">
+                        Learn JavaScript DOM
+                    </div>
+
+                    <div class="task-time">
+                        Completed on:
+                        16 June 2026 | 10:20 PM
+                    </div>
+
+                    <div class="task-actions">
+
+                        <button class="remove-btn">
+                            🗑 Remove
+                        </button>
+
+                    </div>
+
+                </li>
+                
+            -->
+            </ol>
+
+        </section>
+
+    </div>
+    <script>
+
+        // Button switch
+        const ptab=document.getElementById("pendingTab");
+        const ctab=document.getElementById("completedTab");
+        const psec=document.getElementById("pendingSection")
+        const csec=document.getElementById("completedSection")
+
+        ptab.addEventListener('click',()=>{
+            const ele=document.querySelector(".active");
+                if(ele!=ptab){
+                ele.classList.remove("active");
+                ptab.className+=" active";
+                const sec=document.getElementById(`${ele.id.substring(0,ele.id.length-3)}Section`);
+                sec.style.display="none";
+                psec.style.display="block";
+                }
+        })
+
+        ctab.addEventListener('click',()=>{
+            const ele=document.querySelector(".active");
+            if(ele!=ctab){
+            ele.classList.remove("active");
+            ctab.className+=" active";
+            const sec=document.getElementById(`${ele.id.substring(0,ele.id.length-3)}Section`);
+            sec.style.display="none";
+            csec.style.display="block";
+        }
+            
+        })
+
+
+        const form =document.getElementById("taskForm");
+        const ptask=document.getElementById("allTask");//ol
+        const ctask=document.getElementById("completedTasks");//ol
+
+
+        form.addEventListener('submit',(e)=>{
+            e.preventDefault();
+            let now=new Date();
+            const newele=document.createElement("li");
+            newele.innerHTML=`
+                    <div class="task-title">
+                        ${document.getElementById("task").value}
+                    </div>
+
+                    <div class="task-time">
+                        ${now.toLocaleDateString()} | ${now.toLocaleTimeString()}
+                    </div>
+
+                    <div class="task-actions">
+
+                        <button class="done-btn">
+                            ✓ Done
+                        </button>
+
+                       
+
+                        <button class="remove-btn">
+                            🗑 Remove
+                        </button>
+
+                    </div>
+            `
+            const title=newele.querySelector(".task-title");
+            const taskTime=newele.querySelector(".task-time");
+
+            const actions=newele.querySelector(".task-actions");
+            const edit=document.createElement("button");
+
+            edit.classList.add("edit-btn");
+            edit.textContent="✏ Edit";
+            edit.addEventListener('click',()=>{
+                // one method using promt
+                // let newtext=prompt("Enter new Title of taks:",title.textContent.trim())
+                // if(newtext!=null){
+                //     title.textContent=newtext;
+                // }
+
+                // next method using input box
+                const input = document.createElement("input");
+                input.type = "text";
+                input.value = title.textContent.trim();
+                input.style.color="blue";
+                input.style.fontSize="21px";
+                title.replaceWith(input);
+
+                input.focus();
+
+                input.addEventListener("blur", () => {
+                    if(input.value!="")title.textContent = input.value;
+                    input.replaceWith(title);
+                });
+
+                // input.addEventListener("keyup", (e) => {
+                //     if(e.key==="Enter"){
+                //     if(input.value!="")title.textContent = input.value;
+                //     input.replaceWith(title);}
+                // });
+
+                // input.addEventListener("keydown", (e) => {
+                //     if(e.key==="Enter"){
+                //     if(input.value!="")title.textContent = input.value;
+                //     input.replaceWith(title);}
+                // });
+
+            })
+            actions.append(edit);
+            ptask.append(newele);
+
+
+            const done=newele.querySelector(".done-btn");
+            done.addEventListener('click',()=>{
+                if(done.textContent.trim()=="✓ Done"){
+                ptask.removeChild(newele);
+                ctask.append(newele);
+                done.style.backgroundColor="orange";
+                done.textContent="❌ Not Done";
+                actions.removeChild(edit);
+                let t=new Date();
+                taskTime.textContent=`Completed At : ${t.toLocaleDateString()} | ${t.toLocaleTimeString()}`
+            }
+            else{
+                ctask.removeChild(newele);
+                done.style.backgroundColor="#00c853";
+                done.textContent="✓ Done";
+                
+                ptask.append(newele);
+                actions.append(edit);
+                let t=new Date();
+                taskTime.textContent=`Arrived At: ${t.toLocaleDateString()} | ${t.toLocaleTimeString()}`
+                }
+
+            });
+
+            const rem=newele.querySelector(".remove-btn");
+            rem.addEventListener('click',(e)=>{
+                let result=confirm(`Are you sure to delete this taks:${newele.querySelector(".task-title").textContent}`);
+                if(result)newele.remove();
+            })
+
+
+
+        })
+        
+        
+
+
+    </script>
+</body>
+</html>
+
+
+<!-- <form id="form">
+    <input type="text" id="inp">
+</form>
+
+<script>
+document.getElementById("form").addEventListener("submit", (e) => {
+    e.preventDefault(); // Prevent page refresh
+    console.log(document.getElementById("inp").value);
+});
+</script>
+
+Pressing Enter inside the input automatically triggers the submit event.
+ -->
